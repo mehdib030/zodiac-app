@@ -1,0 +1,15 @@
+<div>
+    <div>
+     <h2>Add New Request</h2>
+    </div>
+    <br>
+    <div>
+       <p-multiSelect id='contacts-id' [options]="requestors" [(ngModel)]="selectedRequestors" optionLabel="name" (onChange)="onChange($event)" defaultLabel="Select contacts" ></p-multiSelect>
+    </div>
+    <br><br>
+    <div style="width:55em" ><p-fileUpload  name="demo[]" chooseLabel="UpLoad Excel" accept=".xlsx"  [showCancelButton]="false" (onSelect)="onSelectFile($event)" [showUploadButton]="false"></p-fileUpload></div>
+    <br>
+    <div>
+      <p-button label="Submit"></p-button>
+    </div>
+  </div>

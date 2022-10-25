@@ -1,0 +1,38 @@
+<div>
+<h2>Edit Request(s)</h2>
+
+<div class="card">
+    <p-table [value]="requests" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" styleClass="p-datatable-striped"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" editMode="row">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>RequestId</th>
+                <th>Famous Person(s)</th>
+                <th>Contact(s)</th>
+                <th>Status</th>
+                <th style="width:8rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-request  let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="request">
+                <td>{{request.requestId}}</td>
+                <td>{{request.famousPeople}}</td>
+                <td>{{request.contacts}}</td>
+                <td>{{request.status}}</td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(request)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(request)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(request, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>
+</div>
+

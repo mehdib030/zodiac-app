@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <table>
+      <tr><td width="500em"><h1>Famous People Zodiac</h1></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div>
+    <p-menubar [model]="items">
+      <ng-template pTemplate="end">
+        <p-button label="Sign-Up" (click)="register()"></p-button>
+    </ng-template>
+    </p-menubar>
+  </div>
+  <router-outlet></router-outlet>
+</div>
