@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 //import * as Excel from 'exceljs';
-import { read, utils, writeFileXLSX,readFile,WorkBook, WorkSheet } from 'xlsx'; 
+//import { read, utils, writeFileXLSX,readFile,WorkBook, WorkSheet } from 'xlsx'; 
 import { Requestor } from './model/requestor-entity.model';
 import {MenuItem} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
