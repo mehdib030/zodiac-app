@@ -36,6 +36,25 @@ export class AppComponent {
 
      this.items = [
       {
+        label: 'File',
+        items:[{
+          label: 'New File', 
+                icon:'pi pi-fw pi-plus',
+                routerLink:['new-file']
+            },{
+                label: 'Edit File', 
+                icon:'pi pi-fw pi-pencil',
+                routerLink:['edit-file']
+        }]
+       },
+          {
+          label: 'Contacts',
+          items:[{
+            label: 'Add/Edit Contact(s)', 
+                  routerLink:['edit-contact']
+              }]
+      },
+      {
           label: 'Request',
           items: [{
                   label: 'New Request', 
@@ -46,33 +65,8 @@ export class AppComponent {
                   icon:'pi pi-fw pi-pencil',
                   routerLink:['edit-request']
               }
-          ]},
-          {
-          label: 'Contacts',
-          items:[{
-            label: 'New Contact(s)', 
-                  icon:'pi pi-fw pi-plus',
-                  routerLink:['add-contact']
-              },{
-                  label: 'Edit Contact(s)', 
-                  icon:'pi pi-fw pi-pencil',
-                  routerLink:['update-contact']
-          }]
-      },
-      {
-      label: 'File',
-      items:[{
-        label: 'New File', 
-              icon:'pi pi-fw pi-plus',
-              routerLink:['new-file']
-          },{
-              label: 'Edit File', 
-              icon:'pi pi-fw pi-pencil',
-              routerLink:['edit-file']
-      }]
-     }
+          ]}
   ];
-
   }
 
   register(){

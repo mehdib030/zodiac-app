@@ -6,6 +6,9 @@
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" editMode="row">
         <ng-template pTemplate="header">
             <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
                 <th>RequestId</th>
                 <th>Famous Person(s)</th>
                 <th>Contact(s)</th>
@@ -15,6 +18,9 @@
         </ng-template>
         <ng-template pTemplate="body" let-request  let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="request">
+                <td>
+                    <p-tableCheckbox [value]="request"></p-tableCheckbox>
+                </td>
                 <td>{{request.requestId}}</td>
                 <td>{{request.famousPeople}}</td>
                 <td>{{request.contacts}}</td>
@@ -27,7 +33,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
-            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            <p-button type="button" icon="pi pi-check" label="Send"></p-button>
         </ng-template>
         <ng-template pTemplate="paginatorright">
             <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>

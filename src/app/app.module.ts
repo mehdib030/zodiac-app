@@ -21,6 +21,9 @@ import {TableModule} from 'primeng/table';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {CardModule} from 'primeng/card';
 import {InputTextModule} from 'primeng/inputtext';
+import {DialogModule} from 'primeng/dialog';
+import { AddRowDirective } from './directives/add-row.directive';
+import { AddFileComponent } from './add-file/add-file.component';
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import {InputTextModule} from 'primeng/inputtext';
     EditRequestComponent,
     RegistrationComponent,
     AddContactComponent,
-    EditContactComponent
+    EditContactComponent,
+    AddRowDirective,
+    AddFileComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,8 @@ import {InputTextModule} from 'primeng/inputtext';
     TableModule,
     DynamicDialogModule,
     CardModule,
-    InputTextModule
+    InputTextModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

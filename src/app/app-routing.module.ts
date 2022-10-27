@@ -9,7 +9,7 @@ const  routes: Routes = [
   { path: 'new-request', component: NewRequestComponent },
   { path: 'edit-request', component: EditRequestComponent },
   { path: 'add-contact', component: AddContactComponent },
-  { path: 'update-contact', component: EditContactComponent }
+  { path: 'edit-contact', component: EditContactComponent }
 ];
 
 @NgModule({

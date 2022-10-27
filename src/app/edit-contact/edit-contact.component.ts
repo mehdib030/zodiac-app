@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Contact } from '../model/contact.model';
+import { Request } from '../model/request.model';
 
 @Component({
   selector: 'app-edit-contact',
@@ -41,6 +43,9 @@ export class EditContactComponent implements OnInit {
     // this.products2[index] = this.clonedProducts[product.id];
     // delete this.clonedProducts[product.id];
  }
- 
+
+ newRow() {
+  return { name: '', email: '' };
+}
 
 }

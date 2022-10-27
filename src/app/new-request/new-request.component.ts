@@ -65,8 +65,14 @@ export class NewRequestComponent implements OnInit {
     console.log(event.value);
   }
 
-  submitRequest(){
-    
+  isDisabled(event:any){
+     //console.log('Disabled');
+     return  this.data == null || this.selectedRequestors == null;
+     //return false;
+  }
+
+  submitRequest(event:any){
+    console.log('Disabled');
   }
 
 }
