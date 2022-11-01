@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import {DialogService} from 'primeng/dynamicdialog';
+import { Registration } from '../model/registration.model';
+import { RegistrationService } from './registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,12 +12,40 @@ import {DialogService} from 'primeng/dynamicdialog';
 })
 export class RegistrationComponent implements OnInit {
   
-  name:string=''
-  email:string=''
+  //name:string=''
+  //email:string=''
 
-  constructor(public dialogService: DialogService) {}
+  registration!: Registration;
+
+  registrationFormGroup!: FormGroup;
+
+  constructor(public dialogService: DialogService,private registrationService:RegistrationService, private builder:FormBuilder) {
+    this.registrationFormGroup =  this.builder.group({
+      registration: this.builder.group({
+        name:[''],
+        email:['']
+      })
+    })
+  }
 
   ngOnInit(): void {
   }
 
+  createRegistration(){
+
+    let name = this.registrationFormGroup.get('registration')!.value.name;
+    console.log('NAME = ', name);
+
+    let email = this.registrationFormGroup.get('registration')!.value.email;
+    console.log('EMAIL = ', email);
+
+      this.registrationService.createRegistration(this.registrationFormGroup.get('registration')!.value).subscribe({
+        next: data  => {
+          console.log("Registration Creation Successful");
+        },
+        error: error => {
+            console.log("Error");
+        }
+      })
+  }
 }

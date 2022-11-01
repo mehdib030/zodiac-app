@@ -1,20 +1,24 @@
+<form [formGroup] = "registrationFormGroup" (submit)="createRegistration()">
 <p-card [style]="{width: '360px',box:'none'}">
-   
+ 
+    <div formGroupName = "registration" >
         <div> 
             <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="name"> 
+            <input id="float-input" type="text" pInputText formControlName="name"> 
             <label for="float-input">Name</label>
             </span>
         </div>
        <br>
         <div> 
             <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="email"> 
+            <input id="float-input" type="text" pInputText formControlName="email"> 
             <label for="float-input">Email</label>
             </span>
         </div>
-    <ng-template pTemplate="footer">
-        <p-button label="Save" icon="pi pi-check"></p-button>
-        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
-    </ng-template>
+    </div>
+<ng-template pTemplate="footer">
+    <p-button label="Save" icon="pi pi-check" type="submit" ></p-button>
+    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+</ng-template>
 </p-card>
+</form>

@@ -3,8 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_REGISTRAION_URL : 'https://9acwyarpuc.execute-api.us-east-1.amazonaws.com/dev/registration-api'
 };
+
+//const API_REGISTRAION_URL = 'https://9acwyarpuc.execute-api.us-east-1.amazonaws.com/dev';
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -9,7 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { TabViewModule } from 'primeng/tabview';
 import {HttpClientModule} from '@angular/common/http';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MenubarModule} from 'primeng/menubar';
 import { NewRequestComponent } from './new-request/new-request.component';
@@ -53,7 +53,8 @@ import { AddFileComponent } from './add-file/add-file.component';
     DynamicDialogModule,
     CardModule,
     InputTextModule,
-    DialogModule
+    DialogModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
