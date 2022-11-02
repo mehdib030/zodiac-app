@@ -1,4 +1,5 @@
 export interface Registration {
-    name:string,
+    firstName:string,
+    lastName:string,
     email:string
 }

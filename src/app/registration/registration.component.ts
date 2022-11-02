@@ -11,9 +11,6 @@ import { RegistrationService } from './registration.service';
   providers: [DialogService]
 })
 export class RegistrationComponent implements OnInit {
-  
-  //name:string=''
-  //email:string=''
 
   registration!: Registration;
 
@@ -22,7 +19,8 @@ export class RegistrationComponent implements OnInit {
   constructor(public dialogService: DialogService,private registrationService:RegistrationService, private builder:FormBuilder) {
     this.registrationFormGroup =  this.builder.group({
       registration: this.builder.group({
-        name:[''],
+        firstName:[''],
+        lastName:[''],
         email:['']
       })
     })
@@ -33,8 +31,11 @@ export class RegistrationComponent implements OnInit {
 
   createRegistration(){
 
-    let name = this.registrationFormGroup.get('registration')!.value.name;
-    console.log('NAME = ', name);
+    let firstName = this.registrationFormGroup.get('registration')!.value.name;
+    console.log('First Name = ', firstName);
+
+    let lastName = this.registrationFormGroup.get('registration')!.value.name;
+    console.log('First Name = ', lastName);
 
     let email = this.registrationFormGroup.get('registration')!.value.email;
     console.log('EMAIL = ', email);
