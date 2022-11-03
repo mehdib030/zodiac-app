@@ -25,7 +25,6 @@ import {DialogModule} from 'primeng/dialog';
 import { AddRowDirective } from './directives/add-row.directive';
 import { AddFileComponent } from './add-file/add-file.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

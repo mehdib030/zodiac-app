@@ -13,7 +13,7 @@ import { RegistrationComponent } from './registration/registration.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [DialogService]
+  providers: [DialogService, MessageService]
 })
 export class AppComponent {
   title = 'zodiac';
@@ -27,7 +27,7 @@ export class AppComponent {
   selectedRequestors: Requestor[] = [];
   items: MenuItem[]=[];
 
-  constructor(public dialogService: DialogService) {}
+  constructor(public dialogService: DialogService, private messageService: MessageService) {}
 
   ngOnInit() : void{
      console.log('Parse Excel File');
@@ -75,5 +75,10 @@ export class AppComponent {
       width: '25%',
       modal:true
   });
-  }
+      ref.onClose.subscribe(() => {
+        console.log('Closed ...');
+        this.messageService.add({severity:'success', summary: 'Success', detail:'Your registraion was successful.'});
+    });
+}
+  
 }

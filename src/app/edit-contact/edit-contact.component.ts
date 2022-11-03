@@ -1,35 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
+import { Observable, Subscription } from 'rxjs';
 import { Contact } from '../model/contact.model';
 import { Request } from '../model/request.model';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'app-edit-contact',
   templateUrl: './edit-contact.component.html',
   styleUrls: ['./edit-contact.component.scss']
 })
-export class EditContactComponent implements OnInit {
+export class EditContactComponent implements OnInit,OnDestroy {
 
   first = 0;
   rows = 4;
   contacts:Contact[]=[];
+  contactSubscription!: Subscription;
 
-  constructor() { }
+  constructor(private contactsService:ContactService) { }
 
   ngOnInit(): void {
-    this.contacts = [
-      { name:'John Smith', email:'John.Smith@gmail.com'},
-      { name:'Mark Anderson',email:'mark.anderson@gmail.com, mark_anders@hotmail.com'},
-      { name:'Bob Wayne',email:'bob.wayne@gmail.com' },
-      { name:'Jane Doe',email:'Jane.Doe@gmail.com'}
-    ]
+    this.contactSubscription = this.contactsService.getContacts().subscribe({
+        next: contacts =>  this.contacts = contacts
+    })
+    // this.contacts = [
+    //   { name:'John Smith', email:'John.Smith@gmail.com'},
+    //   { name:'Mark Anderson',email:'mark.anderson@gmail.com, mark_anders@hotmail.com'},
+    //   { name:'Bob Wayne',email:'bob.wayne@gmail.com' },
+    //   { name:'Jane Doe',email:'Jane.Doe@gmail.com'}
+    // ]
   }
 
   onRowEditInit(contact: Contact) {
-    // this.clonedProducts[product.id] = {...product};
+    // this.clonedContacts[contact.id] = {...product};
  }
  
  onRowEditSave(contact: Contact) {
+
+    console.log('Saving contact ... ');
+    console.log('First Name: ',contact.firstName);
+    console.log('Last Name: ',contact.lastName);
+    console.log('Email: ',contact.email);
+
+    this.contactSubscription = this.contactsService.createContact(contact).subscribe({
+      next: data  => {
+        console.log("Contact added successfuy");
+      },
+      error: error => {
+          console.log("Error");
+      }
+    });
     // if (product.price > 0) {
          //delete this.clonedProducts[product.id];
         // this.messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
@@ -45,7 +65,11 @@ export class EditContactComponent implements OnInit {
  }
 
  newRow() {
-  return { name: '', email: '' };
+  return { firstName: '', lastName:'', email: '' };
+}
+
+ngOnDestroy(): void {
+  this.contactSubscription.unsubscribe();
 }
 
 }

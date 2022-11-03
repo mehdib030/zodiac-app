@@ -15,7 +15,7 @@ export class RegistrationService {
   }
 
   createRegistration(registration:Registration){
-    const url = `${environment.API_REGISTRAION_URL}`;
+    const url = `${environment.API_REGISTRATION_URL}`;
     return this.http.post(url,registration,this.httpOptions);
   }
 }
