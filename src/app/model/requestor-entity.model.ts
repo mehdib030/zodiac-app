@@ -1,4 +1,10 @@
+import { Contact } from "./contact.model"
+
 export interface Requestor {
-    name:string,
-    email:string
+    requestor_id:number,
+    first_name?:string,
+    last_name?:string,
+    email?:string
+    username?:string,
+    contacts:Contact[]
 }

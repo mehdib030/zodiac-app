@@ -35,18 +35,7 @@ export class AppComponent {
     
 
      this.items = [
-      {
-        label: 'File',
-        items:[{
-          label: 'New File', 
-                icon:'pi pi-fw pi-plus',
-                routerLink:['new-file']
-            },{
-                label: 'Edit File', 
-                icon:'pi pi-fw pi-pencil',
-                routerLink:['edit-file']
-        }]
-       },
+     
           {
           label: 'Contacts',
           items:[{
@@ -82,3 +71,16 @@ export class AppComponent {
 }
   
 }
+
+// {
+//   label: 'File',
+//   items:[{
+//     label: 'New File', 
+//           icon:'pi pi-fw pi-plus',
+//           routerLink:['new-file']
+//       },{
+//           label: 'Edit File', 
+//           icon:'pi pi-fw pi-pencil',
+//           routerLink:['edit-file']
+//   }]
+//  },

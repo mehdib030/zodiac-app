@@ -3,6 +3,7 @@ import { Table } from 'primeng/table';
 import { Observable, Subscription } from 'rxjs';
 import { Contact } from '../model/contact.model';
 import { Request } from '../model/request.model';
+import { Requestor } from '../model/requestor-entity.model';
 import { ContactService } from './contact.service';
 
 @Component({
@@ -16,13 +17,23 @@ export class EditContactComponent implements OnInit,OnDestroy {
   rows = 4;
   contacts:Contact[]=[];
   contactSubscription!: Subscription;
+  requestor!:Requestor;
+  requestorSubscription!:Subscription;
 
   constructor(private contactsService:ContactService) { }
 
   ngOnInit(): void {
+
+    /*this.requestorSubscription = this.contactsService.getRequestorByUserName('mb').subscribe({
+      next: requestor => this.contacts=this.requestor.contacts,
+      error: error => console.log(error)
+    });*/
     this.contactSubscription = this.contactsService.getContacts().subscribe({
-        next: contacts =>  this.contacts = contacts
+        next: contacts =>  this.contacts = contacts,
+        error: error => console.log(error)
     })
+    
+    
     // this.contacts = [
     //   { name:'John Smith', email:'John.Smith@gmail.com'},
     //   { name:'Mark Anderson',email:'mark.anderson@gmail.com, mark_anders@hotmail.com'},
@@ -41,10 +52,10 @@ export class EditContactComponent implements OnInit,OnDestroy {
     console.log('First Name: ',contact.firstName);
     console.log('Last Name: ',contact.lastName);
     console.log('Email: ',contact.email);
-
+    contact.requestor_requestor_id=this.requestor.requestor_id;
     this.contactSubscription = this.contactsService.createContact(contact).subscribe({
       next: data  => {
-        console.log("Contact added successfuy");
+        console.log("Contact added successfully");
       },
       error: error => {
           console.log("Error");
@@ -69,7 +80,8 @@ export class EditContactComponent implements OnInit,OnDestroy {
 }
 
 ngOnDestroy(): void {
-  this.contactSubscription.unsubscribe();
+  this.requestorSubscription?.unsubscribe();
+  this.contactSubscription?.unsubscribe();
 }
 
 }

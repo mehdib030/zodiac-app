@@ -4,5 +4,6 @@ export interface Contact {
     lastName:string,
     email:string,
     effectiveDate?:string,
-    expirationDate?:string
+    expirationDate?:string,
+    requestor_requestor_id:number
 }
