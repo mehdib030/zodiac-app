@@ -7,6 +7,10 @@ import { Requestor } from './model/requestor-entity.model';
 import {MenuItem} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 import { RegistrationComponent } from './registration/registration.component';
+import { Router } from '@angular/router';
+import { CognitoService } from './cognito.service';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 @Component({
@@ -26,12 +30,19 @@ export class AppComponent {
   requestors: Requestor[] = [];
   selectedRequestors: Requestor[] = [];
   items: MenuItem[]=[];
+  isAuthenticated!: boolean;
 
-  constructor(public dialogService: DialogService, private messageService: MessageService) {}
+  constructor(private router: Router,
+    private cognitoService: CognitoService, public dialogService: DialogService, private messageService: MessageService) {}
+
+  
 
   ngOnInit() : void{
-     console.log('Parse Excel File');
 
+     this.cognitoService.isAuthenticated()
+    .then((success: boolean) => {
+      this.isAuthenticated = success;
+    });
     
 
      this.items = [
@@ -59,7 +70,7 @@ export class AppComponent {
   }
 
   register(){
-    const ref = this.dialogService.open(RegistrationComponent, {
+    const ref = this.dialogService.open(SignUpComponent, {
       header: 'Sign-Up',
       width: '25%',
       modal:true
@@ -69,7 +80,28 @@ export class AppComponent {
         this.messageService.add({severity:'success', summary: 'Success', detail:'Your registraion was successful.'});
     });
 }
+
+signIn(){
+  const ref = this.dialogService.open(SignInComponent, {
+    header: 'Sign-Up',
+    width: '25%',
+    modal:true
+});
+    ref.onClose.subscribe(() => {
+      console.log('Closed ...');
+      this.messageService.add({severity:'success', summary: 'Success', detail:'Your registraion was successful.'});
+  });
+}
+
+
   
+public signOut(): void {
+  this.cognitoService.signOut()
+  .then(() => {
+    this.router.navigate(['/signIn']);
+  });
+}
+
 }
 
 // {

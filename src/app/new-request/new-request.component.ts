@@ -52,6 +52,7 @@ export class NewRequestComponent implements OnInit {
     console.log('Uploading File to S3 ...');
 
     let newRequest = {
+        request_id:-1,
         uuid : uuidv4(),
         status: 'received',
         requestor_requestor_id:this.requestors[0].requestor_id,

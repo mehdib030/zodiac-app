@@ -1,19 +1,20 @@
 <div>
 <h2>Edit Request(s)</h2>
 
-<div class="card">
+<div class="card" style="width:60em">
     <p-table [value]="requests" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" styleClass="p-datatable-striped"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" editMode="row">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 3rem">
+                <th>
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th>RequestId</th>
                 <!--<th>Famous Person(s)</th>-->
-                <th>Contact(s)</th>
+                <!--<th>Contact(s)</th>-->
                 <th>Status</th>
-                <th style="width:8rem"></th>
+                <th ></th>
+                <th ></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-request  let-editing="editing" let-ri="rowIndex">
@@ -23,12 +24,15 @@
                 </td>
                 <td>{{request.uuid}}</td>
                 <!--<td>{{request.famousPeople}}</td>-->
-                <td>{{request.contacts}}</td>
+                <!--<td>{{request.contacts}}</td>-->
                 <td>{{request.status}}</td>
-                <td style="text-align:center">
+                <td>
                     <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(request)" class="p-button-rounded p-button-text"></button>
                     <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(request)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
                     <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(request, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                     </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
                 </td>
             </tr>
         </ng-template>
@@ -41,4 +45,69 @@
     </p-table>
 </div>
 </div>
+<div>
+<p-dialog header="Add Contact(s) to Request" [(visible)]="display">
+<div>
 
+    <div class="card" style="width:60em">
+        <p-table  #dt [value]="contacts" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" styleClass="p-datatable-striped"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" editMode="row">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email(s)</th>
+                    <th style="width:8rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contact  let-editing="editing" let-ri="rowIndex" >
+                <tr [pEditableRow]="contact">
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="contact.firstName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{contact.firstName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="contact.lastName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{contact.lastName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="contact.email" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{contact.email}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                
+                    <td style="text-align:center">
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(contact)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(contact)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(contact, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"  appAddRow [table]="dt" [newRow]="newRow()"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" ></p-button>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+</p-dialog>
+</div>

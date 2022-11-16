@@ -24,6 +24,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import { AddRowDirective } from './directives/add-row.directive';
 import { AddFileComponent } from './add-file/add-file.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { AddFileComponent } from './add-file/add-file.component';
     AddContactComponent,
     EditContactComponent,
     AddRowDirective,
-    AddFileComponent
+    AddFileComponent,
+    SignUpComponent,
+    SignInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

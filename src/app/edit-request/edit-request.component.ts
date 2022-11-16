@@ -3,6 +3,7 @@ import { Request } from '../model/request.model';
 import { UploadService } from '../new-request/upload.service';
 import { ContactService } from '../edit-contact/contact.service';
 import { Requestor } from '../model/requestor-entity.model';
+import { Contact } from '../model/contact.model';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class EditRequestComponent implements OnInit {
   requests: Request[]=[];
   requestor!:Requestor;
   requestors:Requestor[]=[];
+  display=false;
   username:string='mb';
+  contacts:Contact[]=[];
 
   constructor(private uploadService:UploadService, private contactService:ContactService) { }
 
@@ -36,8 +39,6 @@ export class EditRequestComponent implements OnInit {
       }
     );
 
-   
-
     /* this.requests = [
       {requestId:'1a2b3c4', contacts:[{email:'John.Smith@gmail.com'}], famousPeople:'Gerard Depardieu',status:'Completed'},
       {requestId:'5r6g67b', contacts:'mark.anderson@gmail.com, bob.wayne@gmail.com', famousPeople:'Al Pacino, Robert Deniro',status:'Completed'},
@@ -49,6 +50,28 @@ export class EditRequestComponent implements OnInit {
   }
 
 onRowEditInit(request: Request) {
+
+  console.log("Editing request",request);
+  this.display=true;
+  this.contactService.getRequestorByUserName(this.username).subscribe({
+    next: requestors =>  {
+      this.requestors = requestors;
+      console.log('Requestor Array:',this.requestors[0]);
+      console.log('Requestor Id: ',this.requestors[0].requestor_id);
+      let requestorId = this.requestors[0].requestor_id;
+
+      console.log('Requestor Id = ',requestorId);
+      console.log('Request Id = ',request.request_id);
+      this.contactService.getContactsbyRequestorIdAndRequestId(requestorId,request.request_id).subscribe({
+        next: contacts => { 
+          this.contacts=contacts
+          console.log('***** Contacts = ',contacts);
+        },
+        error: error => console.log('Error: ',error)
+      })
+    },
+    error: error => console.log('Error: ',error)
+  });
    // this.clonedProducts[product.id] = {...product};
 }
 
@@ -73,5 +96,8 @@ onRowEditCancel(request: Request, index: number) {
    // delete this.clonedProducts[product.id];
 }
 
+newRow() {
+  return { firstName: '', lastName:'', email: '' };
+}
 
 }

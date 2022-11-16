@@ -33,6 +33,15 @@ export class ContactService {
     return this.http.get<Contact[]>(url+'?requestorId='+requestorId,this.httpOptions);
   }
 
+  getContactsbyRequestorIdAndRequestId(requestorId:number,requestId:number){
+    const url = `${environment.API_CONTACTS_URL}`;
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-type':'application/json','Accept': 'application/json'}),
+      params :  new HttpParams().set('requestorId',requestorId).set('requestId',requestId)
+    }
+    return this.http.get<Contact[]>(url,this.httpOptions);
+  }
+
   getRequestorByUserName(username:string){
     const url = `${environment.API_REQUESTOR_URL}`;
     const httpOptions = {

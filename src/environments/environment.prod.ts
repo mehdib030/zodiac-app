@@ -11,4 +11,8 @@ export const environment = {
   //API_UPLOAD_URL:'https://9acwyarpuc.execute-api.us-east-1.amazonaws.com/dev/famous_people/mb',
   API_UPLOAD_URL:'https://a0uzk1m2rk.execute-api.us-east-1.amazonaws.com/dev/upload-api',
   AWS_REGION: 'us-east-1',
+  cognito: {
+    userPoolId: 'us-east-1_RlsCVMbsQ',
+    userPoolWebClientId: '6qu3pnb4e1c8vnnamncmtat65k',
+  },
 };
